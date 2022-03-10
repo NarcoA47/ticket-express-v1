@@ -1,0 +1,21 @@
+.navbar_container{
+   position: fixed;
+   inset-inline: 0;
+   bottom: 0;
+   background-color: var(--surface-1);
+   z-index: 50;
+}
+.link_title{
+   text-transform: capitalize;
+   font-size: .75rem;
+   cursor: pointer;
+}
+.active{
+   color: var(--accent-dark);
+}
+
+@media (prefers-color-scheme: dark){
+   .navbar_container{
+      background-color: var(--surface-dark);
+   }
+}
