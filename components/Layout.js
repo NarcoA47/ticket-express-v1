@@ -11,16 +11,15 @@ import styles from "./styles/Layout.module.css";
 /**
  * Check which page this is, and pass the appropriate data
  * i.e
- * 1. Active Link Icon
- * 2. Page Title in Header ✔ ✅
+ * 1. Page Title in Header ✔ ✅
  */
 
 function Layout({ children }) {
   // Absolute path logic
   const router = useRouter();
   const page = router.asPath.split("/").at(-1);
-  const rawPage = page.replaceAll('-', ' ')
-  const pageName = rawPage.replace(/(^\w|\s\w)/g, m => m.toUpperCase())
+  const rawPage = page.replaceAll("-", " ");
+  const pageName = rawPage.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
   return (
     <>
@@ -28,18 +27,20 @@ function Layout({ children }) {
         <title>{pageName}</title>
         <link rel="icon" href="/tx_smooth_b.svg" />
       </Head>
-      <header className={styles.header}>
-        <Link passHref href="/home">
-          <div className={`image cursor-pointer ${styles.logo}`}>
-            <Image
-              src="/tx_smooth_b.svg"
-              alt="Ticket Express Logo"
-              layout="fill"
-              objectFit="contain"
-            />
-          </div>
-        </Link>
-        <h1>{pageName}</h1>
+      <header>
+        <div className={styles.header}>
+          <Link passHref href="/home">
+            <div className={`image cursor-pointer ${styles.logo}`}>
+              <Image
+                src="/tx_smooth_b.svg"
+                alt="Ticket Express Logo"
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
+          </Link>
+          <h1>{pageName}</h1>
+        </div>
       </header>
       <main className="main">{children}</main>
     </>

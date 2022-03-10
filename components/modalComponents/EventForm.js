@@ -15,7 +15,7 @@ function EventForm({ type, title, desc, date, time, location, duration }) {
       <input
         ref={title}
         type="text"
-        placeholder="Zoomtopia"
+        placeholder="SanFrancisco Concert"
         className="w-full"
         required
       />
@@ -29,7 +29,7 @@ function EventForm({ type, title, desc, date, time, location, duration }) {
       {/* <small>Leave blank if no time is given</small> */}
 
       <label htmlFor="duration">Duration: (minutes)</label>
-      <input ref={duration} type="text" placeholder="180" />
+      <input ref={duration} type="text" placeholder="246" />
 
       <label htmlFor="description">Description:</label>
       <textarea
@@ -37,7 +37,7 @@ function EventForm({ type, title, desc, date, time, location, duration }) {
         name="description"
         id="description"
         type="text"
-        placeholder="Join us this Sunday in a vibrant virtual Event..."
+        placeholder="Watch Fireboy DML perform live this Sunday afternoon from..."
         className="w-full"
         required
       />

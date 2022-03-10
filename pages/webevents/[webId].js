@@ -1,15 +1,10 @@
-import Image from "next/image";
 import Layout from "../../components/Layout";
 import WebCard from "../../components/WebCard";
 import {
-  getFlutterwaveConfig,
-  getMoreDocs,
   getPaths,
   getPropData,
 } from "../../utilities/functions";
 import { useEffect, useState } from "react";
-import { useFlutterwave } from "flutterwave-react-v3";
-import Link from "next/link";
 import LoadingPage from "../../components/LoadingPage";
 import EventLayout from "../../components/EventLayout";
 
@@ -21,7 +16,7 @@ const DummyData = [
     time: "09:00",
     path: "come-dine-with-me",
     price: 2,
-    desc: `This is a get-together activity spiced with lesons from Bank of
+    desc: `This is a get-together activity spiced with lessons from Bank of
   Zambia facilitators on financial discipline and music from our
   beloved singers including Agents of Hope, Nathando, and Assurance
   Accapella`,
@@ -37,9 +32,6 @@ export default function WebEvent({
   price,
   desc,
 }) {
-  // const [moreDocs, setMoreDocs] = useState([]);
-  const [moreDocs, setMoreDocs] = useState([...DummyData]);
-  const [config, setConfig] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,14 +39,9 @@ export default function WebEvent({
     setLoading(false);
   }, [image]);
 
-  console.log("====================================");
-  console.log(image);
-  console.log(config);
-  console.log("====================================");
-
   return !loading ? (
     <Layout>
-      <EventLayout>
+      <EventLayout field='webevents' path={path} price={price} title={title}>
         <WebCard
           desc={desc}
           image={image ? image : "/fuck"}

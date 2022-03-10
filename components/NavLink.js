@@ -45,7 +45,7 @@ function NavLink({ page, active, link }) {
       <div className="stack">
         <Icon
           icon={active ? iconBold : iconRegular}
-          className={`navBtn ${active && styles.active}`}
+          className={`navBtn ${active && styles.active} ${styles.nav_link}`}
         />
         <p className={`${styles.link_title} ${active && styles.active}`}>{page}</p>
       </div>

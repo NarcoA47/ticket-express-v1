@@ -1,122 +1,61 @@
 import Image from "next/image";
 import CinemaCard from "../../components/CinemaCard";
 import Layout from "../../components/Layout";
-import { getPaths, getPropData } from "../../utilities/functions";
+import { getMoreDocs, getPaths, getPropData } from "../../utilities/functions";
 import { db, getDocs, collection, query, where } from "../../firebase";
+import EventLayout from "../../components/EventLayout";
 
-export default function cinemaDynamic({
-  image,
-  title,
-  genre,
-  rating,
-  duration,
-  desc,
-  cast,
-  path,
-  likes,
-  price,
-}) {
+export default function cinemaDynamic({ props, moreProps }) {
+  console.log(props, moreProps);;
   return (
     <Layout>
-      <CinemaCard
-        image={image}
-        title={title}
-        genre={genre}
-        path={path}
-        duration={duration}
-        cast={cast}
-        description={desc}
-        rating={rating}
-        likes={likes}
-        price={price}
-      />
-
-      <div className="divider">
-        <p>More Events</p>
-      </div>
-
-      <div className="card-container">
-        <div className="card-preview">
-          <div className="image">
-            <Image
-              src="/img/event5.jpg"
-              alt="event preview image"
-              layout="fill"
-            />
-          </div>
-          <div className="details preview-details">
-            <div className="date_and_time">
-              <p className="date">
-                26 <span> Dec </span>
-              </p>
-            </div>
-            <h2 className="title">Secret House Party</h2>
-          </div>
-        </div>
-
-        <div className="card-preview">
-          <div className="image">
-            <Image
-              src="/img/event5.jpg"
-              alt="event preview image"
-              layout="fill"
-            />
-          </div>
-          <div className="details preview-details">
-            <div className="date_and_time">
-              <p className="date">
-                26 <span> Dec </span>
-              </p>
-            </div>
-            <p className="title">Secret House Party</p>
-          </div>
-        </div>
-
-        <div className="card-preview">
-          <div className="image">
-            <Image
-              src="/img/event5.jpg"
-              alt="event preview image"
-              layout="fill"
-            />
-          </div>
-          <div className="details preview-details">
-            <div className="date_and_time">
-              <p className="date">
-                26 <span> Dec </span>
-              </p>
-            </div>
-            <p className="title">Secret House Party</p>
-          </div>
-        </div>
-      </div>
+      <EventLayout
+        field="cinema"
+        path={props.path}
+        price={props.price}
+        title={props.title}
+        moreProps={moreProps}
+      >
+        <CinemaCard
+          image={props.image}
+          title={props.title}
+          genre={props.genre}
+          path={props.path}
+          duration={props.duration}
+          cast={props.cast}
+          description={props.desc}
+          rating={props.rating}
+          likes={props.likes}
+          price={props.price}
+        />
+      </EventLayout>
     </Layout>
   );
 }
 
 export async function getStaticProps(context) {
   const path = context.params.cinemaId;
-  const props = await getPropData("webevents", `${path}`);
-  console.log('====================================');
-  console.log(props);
-  console.log('====================================');
-  if (props[0] === {}) {
+  const prop = await getPropData("cinema", `${path}`);
+  if (!prop.length > 0) {
     return {
       notFound: true,
     };
   }
+  const moreProps = await getMoreDocs("cinema", `${path}`, 4);
+
+  const props = { props: { ...prop[0] }, moreProps: { ...moreProps } };
   return {
     // props: DummyData[0],
-    props: props[0],
+    props: { props },
   };
 }
 
 export async function getStaticPaths() {
   // fetch pages from firebase database
   const paths = await getPaths("cinema");
-  console.log('====================================');
+  console.log("====================================");
   console.log(paths);
-  console.log('====================================');
+  console.log("====================================");
   return {
     paths: paths,
     fallback: true, // false or 'blocking'

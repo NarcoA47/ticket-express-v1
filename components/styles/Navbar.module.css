@@ -1,21 +1,37 @@
-.navbar_container{
-   position: fixed;
-   inset-inline: 0;
-   bottom: 0;
-   background-color: var(--surface-1);
-   z-index: 50;
+.navbar_container {
+  position: relative;
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  /* background-color: var(--surface-1); */
+  z-index: 100;
 }
-.link_title{
-   text-transform: capitalize;
-   font-size: .75rem;
-   cursor: pointer;
+.navbar_container::before {
+  content: "";
+  position: absolute;
+  inset: 0 0;
+  backdrop-filter: blur(20px);
+  /* border: 1px solid slateblue; */
+  background-color: var(--surface-light-transparent);
+  /* background-color: var(--accent-transparent); */
+  z-index: 50;
 }
-.active{
-   color: var(--accent-dark);
+.nav_link {
+  z-index: 50;
+}
+.link_title {
+  text-transform: capitalize;
+  font-size: 0.75rem;
+  cursor: pointer;
+  z-index: 50;
+}
+.active {
+  color: var(--accent-dark);
+  z-index: 50;
 }
 
-@media (prefers-color-scheme: dark){
-   .navbar_container{
-      background-color: var(--surface-dark);
-   }
+@media (prefers-color-scheme: dark) {
+  .navbar_container {
+    background-color: var(--surface-dark);
+  }
 }

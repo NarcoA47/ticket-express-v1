@@ -28,7 +28,6 @@ function NavbarBottom() {
 
   const pageCheck = ["upload", ""];
 
-  console.log(currentPage);
   // Hide navbar if on 'index' or 'upload' page
   return (
     !pageCheck.includes(currentPage) && (

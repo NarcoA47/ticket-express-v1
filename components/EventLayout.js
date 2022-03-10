@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useFlutterwave } from "flutterwave-react-v3";
-import { getMoreDocs } from "../utilities/functions";
+import { getFlutterwaveConfig, getMoreDocs } from "../utilities/functions";
+import { useState, useEffect } from "react";
 
-function EventLayout({ path, price, title }) {
-  const [moreDocs, setMoreDocs] = useState([]);
+function EventLayout({ field, path, price, title, moreProps, children }) {
+  const [moreDocs, setMoreDocs] = useState([moreProps]);
   const [config, setConfig] = useState({});
 
   const fname = "Farai";
@@ -13,13 +14,15 @@ function EventLayout({ path, price, title }) {
 
   useEffect(() => {
     setConfig(getFlutterwaveConfig(username, email, title, price));
-    setMoreDocs(getMoreDocs("webevents", `${path}`, 4));
-  }, [path, price, title]);
+    // getMoreDocs(`${field}`, `${path}`, 4).then((value) => setMoreDocs(value));
+  }, [field, path, price, title]);
+  console.log(moreDocs);
 
   const paymentHandler = useFlutterwave(config);
 
   return (
     <>
+      {children}
       <div className="ticket">
         <input
           type="button"
@@ -35,20 +38,20 @@ function EventLayout({ path, price, title }) {
 
       <div className="card-container">
         {moreDocs?.map((doc) => (
-          <Link key={doc.id} passHref href={doc.path}>
+          <Link key={doc?.id} passHref href={doc?.path}>
             <div className="card-preview">
               <div className="image">
-                <Image
-                  src={doc.image}
+                {/* <Image
+                  src={moreDocs ? doc?.image : "/placeholder_image"}
                   alt="event preview image"
                   layout="fill"
-                />
+                /> */}
               </div>
               <div className="details preview-details">
                 <div className="date_and_time">
-                  <p className="date">{doc.date}</p>
+                  <p className="date">{doc?.date}</p>
                 </div>
-                <h2 className="title">{doc.title}</h2>
+                <h2 className="title">{doc?.title}</h2>
               </div>
             </div>
           </Link>

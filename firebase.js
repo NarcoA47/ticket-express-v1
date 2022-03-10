@@ -36,6 +36,17 @@ const firebaseConfig = {
   measurementId: "G-P42R9L9TXJ",
 };
 
+/* Database for pre-release */
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBhjcqLZly10xAUfZXZo0GB2DBbr9ppAvs",
+//   authDomain: "ticket-express-dev-c85a9.firebaseapp.com",
+//   projectId: "ticket-express-dev-c85a9",
+//   storageBucket: "ticket-express-dev-c85a9.appspot.com",
+//   messagingSenderId: "770731572398",
+//   appId: "1:770731572398:web:fb02a6b97900159f68013f"
+// };
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
-import Modal from "./modalComponents/Modal";
 import { postTo } from "../utilities/functions";
 import CinemaForm from "./modalComponents/CinemaForm";
 import WebForm from "./modalComponents/WebForm";
@@ -97,7 +96,6 @@ export default function UploadModal() {
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fieldValue, setFieldValue] = useState("cinema");
-  const [fieldObject, setFieldObject] = useState({});
 
   const uploadPost = async (e) => {
     e.preventDefault();
@@ -252,10 +250,7 @@ export default function UploadModal() {
         <div className={styles.container}>
           {/* Image Section */}
           {selectedFile ? (
-            <div
-              className="image"
-              // className={`"image" ${fieldValue === "cinema" && "cinema_image"}`}
-            >
+            <div className="image">
               <Image
                 src={selectedFile}
                 onClick={() => setSelectedFile(null)}
@@ -279,10 +274,10 @@ export default function UploadModal() {
 
           {/* Input Header */}
           <h3 className={styles.inputHeader}>
-            Upload a Photo{" "}
             <span>
               <Icon icon="heroicons-outline:arrow-circle-up" inline={true} />
             </span>
+            Upload a Photo{" "}
           </h3>
 
           {/* Upload Logic *THIS IS HIDDEN */}

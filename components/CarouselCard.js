@@ -11,7 +11,7 @@ const CarouselCard = ({ path, title, image, rating, cinema }) => {
   return (
     <div className="flex flex-col text-clip">
       <Link passHref href={`/cinema/${path}`}>
-        <div className="relative m-3 rounded-t-md max-w-[11.5rem] w-[36vw]">
+        <div className="carousel_container">
           {/* Image */}
           <motion.div
             className={`image rounded-md cursor-pointer overflow-hidden ${
@@ -25,6 +25,9 @@ const CarouselCard = ({ path, title, image, rating, cinema }) => {
               alt={title}
               layout="fill"
               className="rounded-md"
+              objectFit={cinema && "contain"}
+              priority
+              // placeholder="blur"
             />
           </motion.div>
           {/* Rating */}

@@ -1,23 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
-import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 
 function CinemaCard({
+  cinema,
   cast,
   desc,
   duration,
   genre,
   image,
-  path,
   rating,
   title,
   price,
 }) {
-  const fname = "Farai";
-  const username = "Farai Rubvuta";
-  const email = "farairubvuta@gmail.com";
-
-  const paymentHandler = useFlutterwave(config);
   return (
     <>
       <Head>
@@ -27,11 +21,17 @@ function CinemaCard({
 
       <div className="container">
         <div className="image">
-          <Image src={image} alt="Web event image" layout="fill" />
+          <Image
+            src={image}
+            alt="Web event image"
+            layout="fill"
+            objectFit={cinema && "contain"}
+            priority
+          />
         </div>
         <div className="details">
           <h1 className="title">{title}</h1>
-          <div className="flex">
+          <div className="flex justify-between">
             <p className="genre">{genre}</p>
             <p className="rating">{rating}</p>
             <p className="duration">{duration}</p>
@@ -41,22 +41,6 @@ function CinemaCard({
           <p className="price">
             Price: <span>{price}</span>
           </p>
-        </div>
-        <div className="ticket">
-          <button
-            type="button"
-            className="btn hover:bg-orange-500"
-            onClick={() => {
-              paymentHandler({
-                callback: (response) => {
-                  console.log(response);
-                  closePaymentModal;
-                },
-              });
-            }}
-          >
-            Buy Ticket
-          </button>
         </div>
       </div>
     </>

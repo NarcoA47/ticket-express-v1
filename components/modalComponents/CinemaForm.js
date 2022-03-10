@@ -34,7 +34,7 @@ function CinemaForm({
       <input
         ref={title}
         type="text"
-        placeholder="Tenet 2"
+        placeholder="Spiderman: No Way Home"
         className="w-full"
         required
       />
@@ -80,7 +80,7 @@ function CinemaForm({
       <input
         ref={cast}
         type="text"
-        placeholder="Ryan Reynolds, Will Smith, Nikita Harris"
+        placeholder="Tom Holland, Zendaya, Nikita Harris"
         className="border-none w-full"
         required
       />
@@ -100,7 +100,7 @@ function CinemaForm({
       </div>
 
       <button type="button" onClick={addCinema}>
-        + Add Cinema
+       <b>+</b> Add Cinema
       </button>
     </>
   );

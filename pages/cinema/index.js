@@ -1,20 +1,22 @@
 import { db, collection, getDocs, orderBy, query } from "../../firebase";
 import CarouselCard from "../../components/CarouselCard";
 import Layout from "../../components/Layout";
+import { getProps } from "../../utilities/functions";
 
-const cinema = ({ cinema }) => {
+const cinema = ({ props }) => {
   return (
     <Layout>
-      <div className="grid grid-col-2">
-        {cinema.map((item) => (
+      <div className="two_column_grid">
+        {props.map((prop) => (
           <CarouselCard
-            key={item.id}
-            id={item.id}
-            image={item.image}
-            title={item.title}
-            description={item.desc}
-            rating={item.rating}
-            likes={item.likes}
+            cinema
+            key={prop.id}
+            id={prop.id}
+            image={prop.image}
+            title={prop.title}
+            description={prop.desc}
+            rating={prop.rating}
+            likes={prop.likes}
           />
         ))}
       </div>
@@ -25,21 +27,13 @@ const cinema = ({ cinema }) => {
 export default cinema;
 
 export async function getStaticProps() {
-  const cinema = [];
-
-  const cinemaRef = await getDocs(
-    query(collection(db, "cinema"), orderBy("rating", "desc"))
-  );
-  cinemaRef.forEach((doc) => {
-    cinema.push({
-      id: doc.id,
-      ...doc.data(),
-    });
-  });
-
-  const data = { cinema };
-
+  const props = await getProps("cinema", 10);
+  if (!props.length > 0) {
+    return {
+      notFound: true,
+    };
+  }
   return {
-    props: data,
+    props: { props },
   };
 }
