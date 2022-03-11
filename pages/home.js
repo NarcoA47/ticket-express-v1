@@ -13,10 +13,10 @@ export default function Home() {
   const [eventsProps, setEventsProps] = useState([]);
 
   useEffect(() => {
-    getProps("sports", 5).then((value) => setSportsProps(value));
-    getProps("cinema", 5).then((value) => setCinemaProps(value));
-    getProps("events", 5).then((value) => setEventsProps(value));
-    getProps("web", 5).then((value) => {
+    getProps("sports", " ", 5).then((value) => setSportsProps(value));
+    getProps("cinema", " ", 5).then((value) => setCinemaProps(value));
+    getProps("events", " ", 5).then((value) => setEventsProps(value));
+    getProps("webevents", " ", 5).then((value) => {
       setWebProps(value);
       setLoading(false);
     });
@@ -39,6 +39,7 @@ export default function Home() {
                   {cinemaProps.map((item) => (
                     <CarouselCard
                       cinema
+                      field="cinema"
                       path={item.path}
                       key={item.id}
                       id={item.id}
@@ -55,22 +56,12 @@ export default function Home() {
                 <div className="scrollable_grid">
                   {sportsProps.map((item) => (
                     <CarouselCard
+                      field="sports"
                       path={item.path}
                       key={item.id}
                       id={item.id}
                       title={item.title}
                       image={item.image}
-                    />
-                  ))}
-                  {cinemaProps.map((item) => (
-                    <CarouselCard
-                      cinema
-                      path={item.path}
-                      key={item.id}
-                      id={item.id}
-                      title={item.title}
-                      image={item.image}
-                      rating={item.rating}
                     />
                   ))}
                 </div>
@@ -81,22 +72,12 @@ export default function Home() {
                 <div className="scrollable_grid">
                   {eventsProps.map((item) => (
                     <CarouselCard
+                      field="events"
                       path={item.path}
                       key={item.id}
                       id={item.id}
                       title={item.title}
                       image={item.image}
-                    />
-                  ))}
-                  {cinemaProps.map((item) => (
-                    <CarouselCard
-                      cinema
-                      path={item.path}
-                      key={item.id}
-                      id={item.id}
-                      title={item.title}
-                      image={item.image}
-                      rating={item.rating}
                     />
                   ))}
                 </div>
@@ -107,22 +88,12 @@ export default function Home() {
                 <div className="scrollable_grid">
                   {webProps.map((item) => (
                     <CarouselCard
+                      field="webenvents"
                       path={item.path}
                       key={item.id}
                       id={item.id}
                       title={item.title}
                       image={item.image}
-                    />
-                  ))}
-                  {cinemaProps.map((item) => (
-                    <CarouselCard
-                      cinema
-                      path={item.path}
-                      key={item.id}
-                      id={item.id}
-                      title={item.title}
-                      image={item.image}
-                      rating={item.rating}
                     />
                   ))}
                 </div>

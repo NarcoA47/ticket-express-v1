@@ -1,32 +1,30 @@
-import Image from "next/image";
 import CinemaCard from "../../components/CinemaCard";
 import Layout from "../../components/Layout";
-import { getMoreDocs, getPaths, getPropData } from "../../utilities/functions";
-import { db, getDocs, collection, query, where } from "../../firebase";
+import { getPaths, getPropData, getProps } from "../../utilities/functions";
 import EventLayout from "../../components/EventLayout";
 
-export default function cinemaDynamic({ props, moreProps }) {
-  console.log(props, moreProps);;
+export default function cinemaDynamic({ props, moreProps, field }) {
+  console.log(props, moreProps);
   return (
     <Layout>
       <EventLayout
-        field="cinema"
+        field={field}
         path={props.path}
         price={props.price}
         title={props.title}
         moreProps={moreProps}
       >
         <CinemaCard
-          image={props.image}
-          title={props.title}
-          genre={props.genre}
-          path={props.path}
-          duration={props.duration}
+          cinema
           cast={props.cast}
-          description={props.desc}
+          desc={props.desc}
+          duration={props.duration}
+          genre={props.genre}
+          image={props.image}
           rating={props.rating}
-          likes={props.likes}
+          title={props.title}
           price={props.price}
+          likes={props.likes}
         />
       </EventLayout>
     </Layout>
@@ -41,9 +39,13 @@ export async function getStaticProps(context) {
       notFound: true,
     };
   }
-  const moreProps = await getMoreDocs("cinema", `${path}`, 4);
+  const moreProps = await getProps("cinema", `${path}`, 4);
 
-  const props = { props: { ...prop[0] }, moreProps: { ...moreProps } };
+  const props = {
+    props: { ...prop[0] },
+    moreProps: { ...moreProps },
+    field: "cinema",
+  };
   return {
     // props: DummyData[0],
     props: { props },
@@ -53,9 +55,6 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   // fetch pages from firebase database
   const paths = await getPaths("cinema");
-  console.log("====================================");
-  console.log(paths);
-  console.log("====================================");
   return {
     paths: paths,
     fallback: true, // false or 'blocking'

@@ -1,5 +1,5 @@
 import styles from "./styles/WebForm.module.css";
-function SportForm({ type, title, desc, date, time, location, duration }) {
+function SportForm({ type, title, desc, date, time, location }) {
   return (
     <>
       <label htmlFor="sport-type">Sport:</label>

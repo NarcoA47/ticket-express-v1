@@ -22,7 +22,7 @@ function CinemaCard({
       <div className="container">
         <div className="image">
           <Image
-            src={image}
+            src={image ? image : '/image'}
             alt="Web event image"
             layout="fill"
             objectFit={cinema && "contain"}

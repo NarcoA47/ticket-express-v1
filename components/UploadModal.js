@@ -1,13 +1,14 @@
-import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { postTo } from "../utilities/functions";
+import { serverTimestamp } from "firebase/firestore";
+import Image from "next/image";
 import CinemaForm from "./modalComponents/CinemaForm";
 import WebForm from "./modalComponents/WebForm";
-import { serverTimestamp } from "firebase/firestore";
 import styles from "./styles/UploadModal.module.css";
 import EventForm from "./modalComponents/EventForm";
 import SportForm from "./modalComponents/SportForm";
+import { AnimatePresence, motion } from "framer-motion";
 
 const DataModel = {
   cinemaObject: {
@@ -83,7 +84,7 @@ export default function UploadModal() {
   const genreRef = useRef(null);
   const castRef = useRef(null);
   const directorRef = useRef(null);
-  const airingRef = useRef(null);
+  const airingRef = useRef(new Array());
   //   Event Field Refs
   const typeRef = useRef(null);
   const dateRef = useRef(null);
@@ -140,7 +141,6 @@ export default function UploadModal() {
             title,
             description,
             price,
-            postedOn,
             postedOn,
             // date: serverTimestamp(dateRef.current.value),
             date: dateRef.current.value,
@@ -249,28 +249,40 @@ export default function UploadModal() {
         </span>
         <div className={styles.container}>
           {/* Image Section */}
-          {selectedFile ? (
-            <div className="image">
-              <Image
-                src={selectedFile}
-                onClick={() => setSelectedFile(null)}
-                layout="fill"
-                alt=""
-                objectFit={fieldValue === "cinema" ? "contain" : "cover"}
-              />
-            </div>
-          ) : (
-            <div
-              className={styles.iconContainer}
-              onClick={() => filePickerRef.current.click()}
-            >
-              <Icon
-                icon="heroicons-outline:camera"
-                className={styles.icon}
-                aria-hidden="true"
-              />
-            </div>
-          )}
+          <AnimatePresence exitBeforeEnter>
+            {selectedFile ? (
+              <motion.div
+                key="image"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="image"
+              >
+                <Image
+                  src={selectedFile}
+                  onClick={() => setSelectedFile(null)}
+                  layout="fill"
+                  alt=""
+                  objectFit={fieldValue === "cinema" ? "contain" : "cover"}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="cinema"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className={styles.iconContainer}
+                onClick={() => filePickerRef.current.click()}
+              >
+                <Icon
+                  icon="heroicons-outline:camera"
+                  className={styles.icon}
+                  aria-hidden="true"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Input Header */}
           <h3 className={styles.inputHeader}>
@@ -290,58 +302,85 @@ export default function UploadModal() {
           />
 
           {/* Field Selection */}
-
           {/* Inputs */}
 
           <form onSubmit={uploadPost}>
-            {fieldValue === "cinema" && (
-              <CinemaForm
-                title={titleRef}
-                rating={ratingRef}
-                duration={durationRef}
-                desc={descRef}
-                genre={genreRef}
-                cast={castRef}
-                director={directorRef}
-                price={priceRef}
-                airing={airingRef}
-              />
-            )}
-            {fieldValue === "sports" && (
-              <SportForm
-                title={titleRef}
-                desc={descRef}
-                date={dateRef}
-                time={timeRef}
-                location={locationRef}
-                price={priceRef}
-              />
-            )}
-            {fieldValue === "events" && (
-              <EventForm
-                type={typeRef}
-                title={titleRef}
-                desc={descRef}
-                date={dateRef}
-                time={timeRef}
-                location={locationRef}
-                duration={durationRef}
-                price={priceRef}
-              />
-            )}
-            {fieldValue === "webevents" && (
-              <WebForm
-                title={titleRef}
-                date={dateRef}
-                time={timeRef}
-                desc={descRef}
-                duration={durationRef}
-                link={linkRef}
-                price={priceRef}
-              />
-            )}
-
-            {/* 2. Events */}
+            <AnimatePresence exitBeforeEnter>
+              {fieldValue === "cinema" && (
+                <motion.div
+                  key="cinema"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <CinemaForm
+                    title={titleRef}
+                    rating={ratingRef}
+                    duration={durationRef}
+                    desc={descRef}
+                    genre={genreRef}
+                    cast={castRef}
+                    director={directorRef}
+                    price={priceRef}
+                    airing={airingRef}
+                  />
+                </motion.div>
+              )}
+              {fieldValue === "sports" && (
+                <motion.div
+                  key="sports"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <SportForm
+                    title={titleRef}
+                    desc={descRef}
+                    date={dateRef}
+                    time={timeRef}
+                    location={locationRef}
+                    price={priceRef}
+                  />
+                </motion.div>
+              )}
+              {fieldValue === "events" && (
+                <motion.div
+                  key="events"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <EventForm
+                    type={typeRef}
+                    title={titleRef}
+                    desc={descRef}
+                    date={dateRef}
+                    time={timeRef}
+                    location={locationRef}
+                    duration={durationRef}
+                    price={priceRef}
+                  />
+                </motion.div>
+              )}
+              {fieldValue === "webevents" && (
+                <motion.div
+                  key="webevents"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <WebForm
+                    title={titleRef}
+                    date={dateRef}
+                    time={timeRef}
+                    desc={descRef}
+                    duration={durationRef}
+                    link={linkRef}
+                    price={priceRef}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div className={styles.price}>
               <label htmlFor="price">Price: </label>

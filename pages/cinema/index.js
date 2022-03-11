@@ -1,39 +1,91 @@
-import { db, collection, getDocs, orderBy, query } from "../../firebase";
-import CarouselCard from "../../components/CarouselCard";
-import Layout from "../../components/Layout";
+import { useEffect, useState } from "react";
 import { getProps } from "../../utilities/functions";
+import Layout from "../../components/Layout";
+import LoadingPage from "../../components/LoadingPage";
+import CarouselCard from "../../components/CarouselCard";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 
-const cinema = ({ props }) => {
+export default function SportsPage() {
+  const [loading, setLoading] = useState(true);
+  const [props, setProps] = useState([]);
+
+  useEffect(() => {
+    getProps("cinema", " ", 10).then((value) => {
+      setProps(value);
+      setLoading(false);
+    });
+  }, []);
+
   return (
-    <Layout>
-      <div className="two_column_grid">
-        {props.map((prop) => (
-          <CarouselCard
-            cinema
-            key={prop.id}
-            id={prop.id}
-            image={prop.image}
-            title={prop.title}
-            description={prop.desc}
-            rating={prop.rating}
-            likes={prop.likes}
-          />
-        ))}
-      </div>
-    </Layout>
+    <>
+      <h2>Catch all local stadium games and events of the sports you love.</h2>
+      <AnimatePresence exitBeforeEnter>
+        {!loading ? (
+          <motion.div
+            key="main"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Layout>
+              <div className="two_column_grid">
+                {props.map((prop) => (
+                  <Link key={prop.id} passHref href={`/cinema/${prop.path}`}>
+                    <CarouselCard image={prop.image} title={prop.title} />
+                  </Link>
+                ))}
+              </div>
+            </Layout>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="loadingPage"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <LoadingPage />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
-};
-
-export default cinema;
+}
 
 export async function getStaticProps() {
-  const props = await getProps("cinema", 10);
+  const props = await getProps("cinema", " ", 10);
   if (!props.length > 0) {
     return {
       notFound: true,
     };
   }
   return {
-    props: { props },
+    props: { props, field: "cinema" },
   };
 }
+
+// export default const cinema = ({ props, field }) => {
+//   console.log("Field => ", field);
+//   return (
+//     <Layout>
+//       <div className="two_column_grid">
+//         {props.map((prop) => (
+//           <Link key={prop.id} passHref href={`/cinema/${props.path}`}>
+//             <CarouselCard
+//               cinema
+//               field={field}
+//               path={prop.path}
+//               id={prop.id}
+//               image={prop.image}
+//               title={prop.title}
+//               description={prop.desc}
+//               rating={prop.rating}
+//               likes={prop.likes}
+//             />
+//           </Link>
+//         ))}
+//       </div>
+//     </Layout>
+//   );
+// };

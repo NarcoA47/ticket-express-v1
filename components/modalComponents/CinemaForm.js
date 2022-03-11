@@ -11,7 +11,7 @@ function CinemaForm({
 }) {
   const addCinema = () => {
     const createOption = (name) => {
-      const value = name.split(" ").join("-").toLowerCase();
+      const value = name.replace(" ", "-").toLowerCase();
       const option = document.createElement("option");
       option.setAttribute("value", `${value}`);
       option.innerHTML = name;
@@ -26,7 +26,6 @@ function CinemaForm({
     select.classList.add("w-full", "p-2");
     select.append(...options);
     div.append(select);
-    // `<select ref={airing} name="supportedCinemas" className="w-full p-2" required> <option value="nu-metro">Nu Metro</option> <option value="ster-kinekor">Ster-Kinekor</option> </select>`;
   };
   return (
     <>
@@ -100,7 +99,7 @@ function CinemaForm({
       </div>
 
       <button type="button" onClick={addCinema}>
-       <b>+</b> Add Cinema
+        <b>+</b> Add Cinema
       </button>
     </>
   );

@@ -1,12 +1,19 @@
-import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useFlutterwave } from "flutterwave-react-v3";
-import { getFlutterwaveConfig, getMoreDocs } from "../utilities/functions";
+import { getFlutterwaveConfig, getProps } from "../utilities/functions";
 import { useState, useEffect } from "react";
 
-function EventLayout({ field, path, price, title, moreProps, children }) {
-  const [moreDocs, setMoreDocs] = useState([moreProps]);
+function EventLayout({ price, children }) {
   const [config, setConfig] = useState({});
+  const [props, setProps] = useState([]);
+
+  // Field and Path Logic
+  const router = useRouter();
+  const field = router.asPath.split("/").at(-2);
+  const path = router.asPath.split("/").at(-1);
+  const title = path
+    .replaceAll("-", " ")
+    .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
   const fname = "Farai";
   const username = "Farai Rubvuta";
@@ -14,9 +21,9 @@ function EventLayout({ field, path, price, title, moreProps, children }) {
 
   useEffect(() => {
     setConfig(getFlutterwaveConfig(username, email, title, price));
-    // getMoreDocs(`${field}`, `${path}`, 4).then((value) => setMoreDocs(value));
+    getProps(`${field}`, `${path}`, 4).then((value) => setProps(value));
   }, [field, path, price, title]);
-  console.log(moreDocs);
+  console.log("More Docs => ", props);
 
   const paymentHandler = useFlutterwave(config);
 
@@ -24,12 +31,13 @@ function EventLayout({ field, path, price, title, moreProps, children }) {
     <>
       {children}
       <div className="ticket">
-        <input
+        <button
           type="button"
-          value="Buy Ticket"
           className="btn hover:bg-orange-500"
           onClick={paymentHandler}
-        />
+        >
+          Buy Ticket
+        </button>
       </div>
 
       <div className="divider">
@@ -37,15 +45,15 @@ function EventLayout({ field, path, price, title, moreProps, children }) {
       </div>
 
       <div className="card-container">
-        {moreDocs?.map((doc) => (
-          <Link key={doc?.id} passHref href={doc?.path}>
+        {/* {props.map((doc) => (
+          <Link key={doc?.id} passHref href={doc?.path ? doc.path : "/path"}>
             <div className="card-preview">
               <div className="image">
-                {/* <Image
-                  src={moreDocs ? doc?.image : "/placeholder_image"}
+                <Image
+                  src={doc ? doc?.image : "/placeholder_image"}
                   alt="event preview image"
                   layout="fill"
-                /> */}
+                />
               </div>
               <div className="details preview-details">
                 <div className="date_and_time">
@@ -55,7 +63,7 @@ function EventLayout({ field, path, price, title, moreProps, children }) {
               </div>
             </div>
           </Link>
-        ))}
+        ))} */}
       </div>
     </>
   );

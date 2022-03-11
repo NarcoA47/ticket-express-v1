@@ -3,6 +3,7 @@ import { getProps } from "../../utilities/functions";
 import Layout from "../../components/Layout";
 import LoadingPage from "../../components/LoadingPage";
 import CarouselCard from "../../components/CarouselCard";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function WebEventsPage() {
@@ -10,7 +11,7 @@ export default function WebEventsPage() {
   const [props, setProps] = useState([]);
 
   useEffect(() => {
-    getProps("webevents", 10).then((value) => {
+    getProps("webevents", " ", 10).then((value) => {
       setProps(value);
       setLoading(false);
     });
@@ -28,15 +29,9 @@ export default function WebEventsPage() {
           <Layout>
             <div className="two_column_grid">
               {props.map((prop) => (
-                <CarouselCard
-                  key={prop.id}
-                  id={prop.id}
-                  image={prop.image}
-                  title={prop.title}
-                  description={prop.desc}
-                  rating={prop.rating}
-                  likes={prop.likes}
-                />
+                <Link key={prop.id} passHref href={`/webevents/${prop.path}`}>
+                  <CarouselCard image={prop.image} title={prop.title} />
+                </Link>
               ))}
             </div>
           </Layout>
@@ -56,7 +51,7 @@ export default function WebEventsPage() {
 }
 
 // export async function getStaticProps() {
-//    const props = await getProps("webevents", 10);
+//    const props = await getOrderedProps("webevents", 10);
 //    if (!props.length > 0) {
 //      return {
 //        notFound: true,

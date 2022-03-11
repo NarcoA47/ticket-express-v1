@@ -16,10 +16,10 @@ import {
   storage,
 } from "../firebase";
 
-const getProps = async (field, max) => {
+const getOrderedProps = async (field, order, max) => {
   const array = [];
   const snapshot = await getDocs(
-    query(collection(db, `${field}`), orderBy("rating", "desc"), limit(max))
+    query(collection(db, `${field}`), orderBy(`${order}`, "desc"), limit(max))
   );
   snapshot.forEach((doc) => {
     array.push({
@@ -27,6 +27,7 @@ const getProps = async (field, max) => {
       ...doc.data(),
     });
   });
+  console.log("Array returned => ", array);
   return array;
 };
 
@@ -37,6 +38,7 @@ const getPropData = async (field, path) => {
     query(collection(db, `${field}`), where("path", "==", `${path}`))
   );
   matchingDocs.forEach((doc) => array.push({ ...doc.data() }));
+  console.log("Array returned => ", array);
   return array;
 };
 
@@ -97,18 +99,20 @@ const getPaths = async (field) => {
   return array;
 };
 
-const getMoreDocs = async (field, path, max) => {
+const getProps = async (field, exception, max) => {
   const array = [];
   const docsRef = await getDocs(
     query(
       collection(db, `${field}`),
-      where("path", "!=", `${path}`),
+      where("path", "!=", `${exception}`),
       limit(max)
     )
   );
   docsRef.forEach((doc) => {
     array.push({ id: doc.id, ...doc.data() });
   });
+  console.log("Array returned => ", array);
+  return array;
 };
 
 const getFlutterwaveConfig = (username, email, eventTitle, price) => ({
@@ -153,10 +157,10 @@ const getFlutterwaveConfig = (username, email, eventTitle, price) => ({
 });
 
 export {
-  getProps,
+  getOrderedProps,
   getPropData,
   postTo,
   getPaths,
-  getMoreDocs,
+  getProps,
   getFlutterwaveConfig,
 };
