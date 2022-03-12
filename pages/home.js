@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProps } from "../utilities/functions";
 import Layout from "../components/Layout";
+import Link from "next/link";
 import CarouselCard from "../components/CarouselCard";
 import LoadingPage from "../components/LoadingPage";
 import { AnimatePresence, motion } from "framer-motion";
@@ -88,7 +89,7 @@ export default function Home() {
                 <div className="scrollable_grid">
                   {webProps.map((item) => (
                     <CarouselCard
-                      field="webenvents"
+                      field="webevents"
                       path={item.path}
                       key={item.id}
                       id={item.id}

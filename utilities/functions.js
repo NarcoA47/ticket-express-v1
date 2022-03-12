@@ -27,7 +27,7 @@ const getOrderedProps = async (field, order, max) => {
       ...doc.data(),
     });
   });
-  console.log("Array returned => ", array);
+  console.log("Ordered Props => ", array);
   return array;
 };
 
@@ -38,7 +38,7 @@ const getPropData = async (field, path) => {
     query(collection(db, `${field}`), where("path", "==", `${path}`))
   );
   matchingDocs.forEach((doc) => array.push({ ...doc.data() }));
-  console.log("Array returned => ", array);
+  console.log("Prop Data => ", array);
   return array;
 };
 
@@ -111,7 +111,7 @@ const getProps = async (field, exception, max) => {
   docsRef.forEach((doc) => {
     array.push({ id: doc.id, ...doc.data() });
   });
-  console.log("Array returned => ", array);
+  console.log("Array of Props => ", array);
   return array;
 };
 

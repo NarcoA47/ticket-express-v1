@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { postTo } from "../utilities/functions";
 import { serverTimestamp } from "firebase/firestore";
 import Image from "next/image";

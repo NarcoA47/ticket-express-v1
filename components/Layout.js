@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles/Layout.module.css";
+import { useEffect, useState } from "react";
 
 /* Capitalize every word: 
   str.replace(/(^\w|\s\w)/g, m => m.toUpperCase())
@@ -21,28 +22,40 @@ function Layout({ children }) {
   const rawPage = page.replaceAll("-", " ");
   const pageName = rawPage.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
+  const [currentPage, setCurrentPage] = useState(`${page}`);
+
+  useEffect(() => {
+    setCurrentPage(`${page}`);
+  }, [currentPage, page]);
+
+  const pageCheck = ["upload", ""];
+
   return (
     <>
       <Head>
         <title>{pageName}</title>
         <link rel="icon" href="/tx_smooth_b.svg" />
       </Head>
-      <header>
-        <div className={styles.header}>
-          <Link passHref href="/home">
-            <div className={`image cursor-pointer ${styles.logo}`}>
-              <Image
-                src="/tx_smooth_b.svg"
-                alt="Ticket Express Logo"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-          </Link>
-          <h1>{pageName}</h1>
-        </div>
-      </header>
-      <main className="main">{children}</main>
+      {!pageCheck.includes(currentPage) && (
+        <header>
+          <div className={styles.header}>
+            <Link passHref href="/home">
+              <div className={`image cursor-pointer ${styles.logo}`}>
+                <Image
+                  src="/tx_smooth_b.svg"
+                  alt="Ticket Express Logo"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
+            </Link>
+            <h1>{pageName}</h1>
+          </div>
+        </header>
+      )}
+      <main className={!pageCheck.includes(currentPage) ? "main" : undefined}>
+        {children}
+      </main>
     </>
   );
 }

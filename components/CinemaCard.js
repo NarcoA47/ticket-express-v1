@@ -1,8 +1,8 @@
+import { Icon } from "@iconify/react";
 import Head from "next/head";
 import Image from "next/image";
 
 function CinemaCard({
-  cinema,
   cast,
   desc,
   duration,
@@ -22,19 +22,26 @@ function CinemaCard({
       <div className="container">
         <div className="image">
           <Image
-            src={image ? image : '/image'}
+            src={image ? image : "/image"}
             alt="Web event image"
             layout="fill"
-            objectFit={cinema && "contain"}
+            objectFit="cover"
             priority
           />
         </div>
         <div className="details">
           <h1 className="title">{title}</h1>
-          <div className="flex justify-between">
+          <div className="date_and_time">
             <p className="genre">{genre}</p>
-            <p className="rating">{rating}</p>
-            <p className="duration">{duration}</p>
+            <p className="rating flex items-center">
+              <Icon icon="typcn:star" className="mr-1" />
+              {rating}
+            </p>
+            <p className="duration flex items-center">
+              {" "}
+              <Icon icon="typcn:time" className="mr-1" />
+              {duration} mins
+            </p>
           </div>
           <p className="description">{desc}</p>
           <p className="cast">{cast}</p>

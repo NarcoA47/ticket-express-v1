@@ -2,6 +2,9 @@ import Layout from "../../components/Layout";
 import SportsCard from "../../components/SportsCard";
 import EventLayout from "../../components/EventLayout";
 import LoadingPage from "../../components/LoadingPage";
+import { getPaths, getPropData } from "../../utilities/functions";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function WebEvent() {
@@ -9,20 +12,20 @@ export default function WebEvent() {
   const [props, setProps] = useState([]);
   // Router and PageName Logic
   const router = useRouter();
-  const path = router.asPath;
+  const path = router.asPath.split("/").at(-1);
 
   useEffect(() => {
     getPropData("sports", `${path}`).then((value) => {
-      setProps(value);
+      setProps(value[0]);
       setLoading(false);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [path]);
 
   useEffect(() => {
     if (props.image === undefined) return;
     setLoading(false);
-  }, [props.image]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -36,13 +39,13 @@ export default function WebEvent() {
           <Layout>
             <EventLayout price={props.price}>
               <SportsCard
-                desc={props.desc}
-                image={props.image ? props.image : "/fuck"}
+                desc={props.description}
+                image={props.image}
                 title={props.title}
                 date={props.date}
                 time={props.time}
-                location={props.location}
                 price={props.price}
+                location={props.location}
               />
             </EventLayout>
           </Layout>
@@ -59,27 +62,4 @@ export default function WebEvent() {
       )}
     </AnimatePresence>
   );
-}
-
-// export async function getStaticProps(context) {
-//   const path = context.params.webId;
-//   const props = await getPropData("sports", `${path}`);
-//   if (!props.length > 0) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-//   return {
-//     // props: DummyData[0],
-//     props: props[0],
-//   };
-// }
-
-export async function getStaticPaths() {
-  // fetch pages from firebase database
-  const paths = await getPaths("sports");
-  return {
-    paths: paths,
-    fallback: true, // false or 'blocking'
-  };
 }

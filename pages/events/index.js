@@ -11,7 +11,7 @@ export default function WebEventsPage() {
   const [props, setProps] = useState([]);
 
   useEffect(() => {
-    getProps("cinema", " ", 10).then((value) => {
+    getProps("events", " ", 10).then((value) => {
       setProps(value);
       setLoading(false);
     });
@@ -30,14 +30,12 @@ export default function WebEventsPage() {
             <div className="two_column_grid">
               {props.map((prop) => (
                 <CarouselCard
-                  cinema
-                  field="cinema"
-                  path={prop.path}
-                  key={prop.id}
-                  image={prop.image}
-                  title={prop.title}
-                  rating={prop.rating}
-                />
+                field="events"
+                path={prop.path}
+                key={prop.id}
+                image={prop.image}
+                title={prop.title}
+              />
               ))}
             </div>
           </Layout>
@@ -55,40 +53,3 @@ export default function WebEventsPage() {
     </AnimatePresence>
   );
 }
-
-export async function getStaticProps() {
-  const props = await getProps("cinema", " ", 10);
-  if (!props.length > 0) {
-    return {
-      notFound: true,
-    };
-  }
-  return {
-    props: { props, field: "cinema" },
-  };
-}
-
-// export default const cinema = ({ props, field }) => {
-//   console.log("Field => ", field);
-//   return (
-//     <Layout>
-//       <div className="two_column_grid">
-//         {props.map((prop) => (
-//           <Link key={prop.id} passHref href={`/cinema/${props.path}`}>
-//             <CarouselCard
-//               cinema
-//               field={field}
-//               path={prop.path}
-//               id={prop.id}
-//               image={prop.image}
-//               title={prop.title}
-//               description={prop.desc}
-//               rating={prop.rating}
-//               likes={prop.likes}
-//             />
-//           </Link>
-//         ))}
-//       </div>
-//     </Layout>
-//   );
-// };

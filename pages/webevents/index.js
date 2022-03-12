@@ -29,9 +29,13 @@ export default function WebEventsPage() {
           <Layout>
             <div className="two_column_grid">
               {props.map((prop) => (
-                <Link key={prop.id} passHref href={`/webevents/${prop.path}`}>
-                  <CarouselCard image={prop.image} title={prop.title} />
-                </Link>
+                <CarouselCard
+                  field="webevents"
+                  path={prop.path}
+                  key={prop.id}
+                  image={prop.image}
+                  title={prop.title}
+                />
               ))}
             </div>
           </Layout>
