@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-function SportsCard({ desc, image, date, time, price, title, location }) {
+function SportsCard({ desc, image, date, time, price, title, location, duration }) {
   return (
     <>
       <div className="container">
@@ -14,6 +14,9 @@ function SportsCard({ desc, image, date, time, price, title, location }) {
             <p>{time}</p>
           </div>
           <p className="location">{location}</p>
+          <p className="duration">
+            {Number(duration) === NaN ? duration : `${duration} mins`}
+          </p>
           <p className="description">{desc}</p>
           <p className="price">
             <span>Price: </span>K {price}

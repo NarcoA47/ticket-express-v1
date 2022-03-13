@@ -20,7 +20,7 @@ function CinemaCard({
       </Head>
 
       <div className="container">
-        <div className="image">
+        <div className="image cinema_image">
           <Image
             src={image ? image : "/image"}
             alt="Web event image"

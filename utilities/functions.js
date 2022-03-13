@@ -43,13 +43,15 @@ const getPropData = async (field, path) => {
 };
 
 const postTo = async (field, object, imageString) => {
+  console.log("Posted object => ", object);
   // Check if there already exists a doc with that name
   const matchingDoc = await getDocs(
     query(collection(db, `${field}`), where("path", "==", `${object.path}`))
   );
   if (matchingDoc.length > 0) {
     return alert(`Already an event with the title ${object.title}`);
-  } else {
+  }
+   else {
     const docRef = await addDoc(collection(db, `${field}`), object);
 
     console.log("====================================");

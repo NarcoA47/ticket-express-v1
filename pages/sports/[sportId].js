@@ -45,6 +45,7 @@ export default function WebEvent() {
                 time={props.time}
                 price={props.price}
                 location={props.location}
+                duration={props.duration}
               />
             </EventLayout>
           </Layout>

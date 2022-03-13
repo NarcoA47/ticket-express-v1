@@ -96,7 +96,40 @@ export default function UploadModal() {
   //   Post Management states
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [supportedCinemas, setSupportedCinemas] = useState([]);
   const [fieldValue, setFieldValue] = useState("cinema");
+
+  const addSupportedCinemas = () => {
+    const data = [];
+
+    const cinemas = document.querySelectorAll(".cinema");
+    Array.prototype.forEach.call(cinemas, (item, index) => {
+      if (!data.includes(item.value)) {
+        data.push(item.value);
+      }
+    });
+    setSupportedCinemas(data);
+    console.log(supportedCinemas);
+  };
+
+  const addCinema = () => {
+    const createOption = (name) => {
+      const value = name.replace(" ", "-").toLowerCase();
+      const option = document.createElement("option");
+      option.setAttribute("value", `${value}`);
+      option.innerHTML = name;
+      return option;
+    };
+    const div = document.getElementById("airing_at");
+    const option1 = createOption("Ster-Kinekor");
+    const option2 = createOption("Nu Metro");
+    const options = [option1, option2];
+
+    const select = document.createElement("select");
+    select.classList.add("w-full", "p-2", "cinema");
+    select.append(...options);
+    div.append(select);
+  };
 
   const uploadPost = async (e) => {
     e.preventDefault();
@@ -121,7 +154,7 @@ export default function UploadModal() {
             description,
             price,
             postedOn,
-            airingAt: airingRef.current.value,
+            airingAt: supportedCinemas,
             rating: Number(ratingRef.current.value),
             duration: Number(durationRef.current.value),
             genre: genreRef.current.value,
@@ -143,6 +176,7 @@ export default function UploadModal() {
             price,
             postedOn,
             // date: serverTimestamp(dateRef.current.value),
+            type: typeRef.current.value,
             date: dateRef.current.value,
             time: timeRef.current.value,
             location: locationRef.current.value,
@@ -165,7 +199,7 @@ export default function UploadModal() {
             date: dateRef.current.value,
             time: timeRef.current.value,
             location: locationRef.current.value,
-            duration: Number(durationRef.current.value),
+            duration: durationRef.current.value,
           };
           await postTo(`${fieldValue}`, { ...object }, selectedFile);
           setLoading(false);
@@ -184,7 +218,7 @@ export default function UploadModal() {
             // date: serverTimestamp(dateRef.current.value),
             date: dateRef.current.value,
             time: timeRef.current.value,
-            duration: Number(durationRef.current.value),
+            duration: durationRef.current.value,
             link: linkRef.current.value,
           };
           await postTo(`${fieldValue}`, { ...object }, selectedFile);
@@ -321,7 +355,6 @@ export default function UploadModal() {
                     genre={genreRef}
                     cast={castRef}
                     director={directorRef}
-                    price={priceRef}
                     airing={airingRef}
                   />
                 </motion.div>
@@ -334,12 +367,12 @@ export default function UploadModal() {
                   exit={{ opacity: 0 }}
                 >
                   <SportForm
+                    type={typeRef}
                     title={titleRef}
                     desc={descRef}
                     date={dateRef}
                     time={timeRef}
                     location={locationRef}
-                    price={priceRef}
                   />
                 </motion.div>
               )}
@@ -358,7 +391,6 @@ export default function UploadModal() {
                     time={timeRef}
                     location={locationRef}
                     duration={durationRef}
-                    price={priceRef}
                   />
                 </motion.div>
               )}
@@ -376,11 +408,33 @@ export default function UploadModal() {
                     desc={descRef}
                     duration={durationRef}
                     link={linkRef}
-                    price={priceRef}
                   />
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {fieldValue === "cinema" && (
+              <>
+                <label htmlFor="title">Airing at:</label>
+                <div className="airing_at" id="airing_at">
+                  <select
+                    ref={airingRef}
+                    name="supportedCinemas"
+                    id="supportedCinemas"
+                    className="w-full p-2 cinema"
+                    data-airing
+                    required
+                  >
+                    <option value="nu-metro">Nu Metro</option>
+                    <option value="ster-kinekor">Ster-Kinekor</option>
+                  </select>
+                </div>
+
+                <button type="button" onClick={addCinema}>
+                  <b>+</b> Add Cinema
+                </button>
+              </>
+            )}
 
             <div className={styles.price}>
               <label htmlFor="price">Price: </label>
@@ -398,6 +452,7 @@ export default function UploadModal() {
                 type="submit"
                 disabled={!selectedFile}
                 className={styles.uploadBtn}
+                onClick={addSupportedCinemas}
               >
                 {loading ? "Uploading" : "Upload Post"}
               </button>

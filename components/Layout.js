@@ -33,7 +33,7 @@ function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>{pageName}</title>
+        <title>{currentPage === "" ? "Ticket Express" : pageName}</title>
         <link rel="icon" href="/tx_smooth_b.svg" />
       </Head>
       {!pageCheck.includes(currentPage) && (

@@ -1,12 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
+import Layout from "../components/Layout";
 
 export default function Home() {
   return (
-    <div className="hero">
-      <h1 className="text-3xl text-purple-600 p-5">Home Page</h1>
-      <Link passHref href="/home">
-        <button>Go to Home Page</button>
-      </Link>
-    </div>
+    <Layout>
+      <div className="p-5 text-center">
+        <div className="image h-12">
+          <Image src="/tx_smooth_b.svg" alt="Logo" layout="fill" />
+        </div>
+        <h1 className="text-3xl text-orange-600 p-5">Ticket Express</h1>
+        <Link passHref href="/home">
+          <button className="btn">Go to Home Page</button>
+        </Link>
+      </div>
+    </Layout>
   );
 }

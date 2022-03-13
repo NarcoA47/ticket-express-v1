@@ -1,6 +1,15 @@
 import Image from "next/image";
 
-export default function EventCard({ description, image, date, time, price, title, location }) {
+export default function EventCard({
+  description,
+  image,
+  date,
+  time,
+  price,
+  title,
+  location,
+  duration,
+}) {
   return (
     <>
       <div className="container">
@@ -14,6 +23,9 @@ export default function EventCard({ description, image, date, time, price, title
             <p>{time}</p>
           </div>
           <p className="location">{location}</p>
+          <p className="duration">
+            {Number(duration) === NaN ? duration : `${duration} mins`}
+          </p>
           <p className="description">{description}</p>
           <p className="price">
             <span>Price: </span>K {price}
