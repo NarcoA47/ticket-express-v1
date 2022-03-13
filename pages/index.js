@@ -1,5 +1,4 @@
 import Link from "next/link";
-import UploadModal from "../components/UploadModal";
 
 export default function Home() {
   return (

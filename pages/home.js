@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getProps } from "../utilities/functions";
 import Layout from "../components/Layout";
-import Link from "next/link";
 import CarouselCard from "../components/CarouselCard";
 import LoadingPage from "../components/LoadingPage";
 import { AnimatePresence, motion } from "framer-motion";
@@ -115,35 +114,3 @@ export default function Home() {
     </AnimatePresence>
   );
 }
-// export async function getStaticProps() {
-//   const cinema = [];
-//   const events = [];
-//   const sports = [];
-//   const web = [];
-
-//   const cinemaRef = await getDocs(
-//     query(collection(db, "cinema"), orderBy("rating", "desc"))
-//   );
-//   cinemaRef.forEach((doc) => {
-//     cinema.push({
-//       id: doc.id,
-//       ...doc.data(),
-//     });
-//   });
-
-//   // const eventsRef = await getDocs(
-//   //   query(collection(db, "events"), orderBy("likes", "desc"))
-//   // );
-//   // eventsRef.forEach((doc) => {
-//   //   events.push({
-//   //     id: doc.id,
-//   //     ...doc.data()
-//   //   });
-//   // });
-
-//   const data = { cinema, events, sports, web };
-
-//   return {
-//     props: data,
-//   };
-// }

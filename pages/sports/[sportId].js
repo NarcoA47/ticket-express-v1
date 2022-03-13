@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import SportsCard from "../../components/SportsCard";
 import EventLayout from "../../components/EventLayout";
 import LoadingPage from "../../components/LoadingPage";
-import { getPaths, getPropData } from "../../utilities/functions";
+import { getPropData } from "../../utilities/functions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -24,8 +24,7 @@ export default function WebEvent() {
   useEffect(() => {
     if (props.image === undefined) return;
     setLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.image]);
 
   return (
     <AnimatePresence exitBeforeEnter>

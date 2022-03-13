@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import WebCard from "../../components/WebCard";
 import EventLayout from "../../components/EventLayout";
 import LoadingPage from "../../components/LoadingPage";
-import { getPaths, getPropData } from "../../utilities/functions";
+import { getPropData } from "../../utilities/functions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -24,8 +24,7 @@ export default function WebEvent() {
   useEffect(() => {
     if (props.image === undefined) return;
     setLoading(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.image]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -62,26 +61,3 @@ export default function WebEvent() {
     </AnimatePresence>
   );
 }
-
-// export async function getStaticProps(context) {
-//   const path = context.params.webId;
-//   const props = await getPropData("webevents", `${path}`);
-//   if (!props.length > 0) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-//   return {
-//     // props: DummyData[0],
-//     props: props[0],
-//   };
-// }
-
-// export async function getStaticPaths() {
-//   // fetch pages from firebase database
-//   const paths = await getPaths("webevents");
-//   return {
-//     paths: paths,
-//     fallback: true, // false or 'blocking'
-//   };
-// }

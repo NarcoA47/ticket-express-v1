@@ -3,7 +3,6 @@ import { getProps } from "../../utilities/functions";
 import Layout from "../../components/Layout";
 import LoadingPage from "../../components/LoadingPage";
 import CarouselCard from "../../components/CarouselCard";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function WebEventsPage() {
