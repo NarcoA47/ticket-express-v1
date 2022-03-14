@@ -1,7 +1,4 @@
-import { Icon } from "@iconify/react";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import Toggle from "./Toggle";
 import { useEffect, useState } from "react";
 import styles from "./styles/Navbar.module.css";
 import { useRouter } from "next/router";
