@@ -12,8 +12,10 @@ function EventLayout({ price, children, cinema }) {
 
   // Field and Path Logic
   const router = useRouter();
-  const field = router.asPath.split("/").at(-2);
-  const path = router.asPath.split("/").at(-1);
+  const fieldArray = router.asPath.split("/");
+  const field = fieldArray[fieldArray.length - 2];
+  const pathArray = router.asPath.split("/");
+  const path = pathArray[pathArray.length - 1];
   const title = path
     .replaceAll("-", " ")
     .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());

@@ -18,7 +18,8 @@ import { useEffect, useState } from "react";
 function Layout({ children }) {
   // Absolute path logic
   const router = useRouter();
-  const page = router.asPath.split("/").at(-1);
+  const pageArray = router.asPath.split("/");
+  const page = pageArray[pageArray.length - 1]
   const rawPage = page.replaceAll("-", " ");
   const pageName = rawPage.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
