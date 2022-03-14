@@ -8,5 +8,4 @@ function Upload() {
     </Layout>
   );
 }
-
 export default Upload;

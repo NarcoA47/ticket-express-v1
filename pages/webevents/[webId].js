@@ -12,7 +12,8 @@ export default function WebEvent() {
   const [props, setProps] = useState([]);
   // Router and PageName Logic
   const router = useRouter();
-  const path = router.asPath.split("/").at(-1);
+  const pathArray = router.asPath.split("/");
+  const path = pathArray[pathArray.length - 1];
 
   useEffect(() => {
     getPropData("webevents", `${path}`).then((value) => {

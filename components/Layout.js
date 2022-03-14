@@ -20,7 +20,7 @@ function Layout({ children }) {
   const router = useRouter();
   const pageArray = router.asPath.split("/");
   const page = pageArray[pageArray.length - 1]
-  const rawPage = page.replaceAll("-", " ");
+  const rawPage = page.split("-").join(" ");
   const pageName = rawPage.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
   const [currentPage, setCurrentPage] = useState(`${page}`);

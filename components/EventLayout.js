@@ -17,7 +17,8 @@ function EventLayout({ price, children, cinema }) {
   const pathArray = router.asPath.split("/");
   const path = pathArray[pathArray.length - 1];
   const title = path
-    .replaceAll("-", " ")
+    .split("-")
+    .join(" ")
     .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
   const fname = "Farai";

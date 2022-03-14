@@ -114,7 +114,7 @@ export default function UploadModal() {
 
   const addCinema = () => {
     const createOption = (name) => {
-      const value = name.replace(" ", "-").toLowerCase();
+      const value = name.split(" ").join("-").toLowerCase();
       const option = document.createElement("option");
       option.setAttribute("value", `${value}`);
       option.innerHTML = name;
