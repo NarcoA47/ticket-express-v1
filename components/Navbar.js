@@ -17,7 +17,8 @@ function NavbarBottom() {
    * Check which page this is, and pass the appropriate Active Link Icon
    */
   const router = useRouter();
-  const page = router.asPath.split("/").at(1);
+  const pageArray = router.asPath.split("/");
+  const page = pageArray[pageArray.length - 1];
 
   const [isOpen, setIsOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState(`${page}`);
