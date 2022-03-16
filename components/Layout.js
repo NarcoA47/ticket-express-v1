@@ -50,7 +50,7 @@ function Layout({ children }) {
                 />
               </div>
             </Link>
-            <h1>{pageName}</h1>
+            <h1 className={styles.pageName}>{pageName}</h1>
             <Link passHref href="/upload">
               <p className={styles.upload_link}>Upload</p>
             </Link>
