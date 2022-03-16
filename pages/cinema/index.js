@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import LoadingPage from "../../components/LoadingPage";
 import CarouselCard from "../../components/CarouselCard";
 import { AnimatePresence, motion } from "framer-motion";
+import NoItems from "../../components/NoItems";
 
 export default function WebEventsPage() {
   const [loading, setLoading] = useState(true);
@@ -19,28 +20,40 @@ export default function WebEventsPage() {
   return (
     <AnimatePresence exitBeforeEnter>
       {!loading ? (
-        <motion.div
-          key="main"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <Layout>
-            <div className="two_column_grid">
-              {props.map((prop) => (
-                <CarouselCard
-                  cinema
-                  field="cinema"
-                  path={prop.path}
-                  key={prop.id}
-                  image={prop.image}
-                  title={prop.title}
-                  rating={prop.rating}
-                />
-              ))}
-            </div>
-          </Layout>
-        </motion.div>
+        props?.length === 0 ? (
+          <motion.div
+            key="noItems"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <NoItems />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="main"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Layout>
+              <h2 className="heading">Cinema Page</h2>
+              <div className="two_column_grid">
+                {props.map((prop) => (
+                  <CarouselCard
+                    cinema
+                    field="cinema"
+                    path={prop.path}
+                    key={prop.id}
+                    image={prop.image}
+                    title={prop.title}
+                    rating={prop.rating}
+                  />
+                ))}
+              </div>
+            </Layout>
+          </motion.div>
+        )
       ) : (
         <motion.div
           key="loadingPage"
@@ -54,14 +67,3 @@ export default function WebEventsPage() {
     </AnimatePresence>
   );
 }
-// export async function getStaticProps() {
-//   const props = await getProps("cinema", " ", 10);
-//   if (!props.length > 0) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-//   return {
-//     props: { props, field: "cinema" },
-//   };
-// }

@@ -8,7 +8,6 @@ function WebForm({ title, date, time, desc, duration, link }) {
         ref={title}
         type="text"
         placeholder="Zoomtopia"
-        className="w-full"
         required
       />
 
@@ -31,7 +30,6 @@ function WebForm({ title, date, time, desc, duration, link }) {
         id="description"
         type="text"
         placeholder="Join us this Sunday in a vibrant virtual Event..."
-        className="w-full"
         required
       />
 
@@ -40,7 +38,6 @@ function WebForm({ title, date, time, desc, duration, link }) {
         ref={link}
         type="text"
         placeholder="https://zoom.us/j/5551112222"
-        className="w-full"
         required
       />
     </>

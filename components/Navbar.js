@@ -15,7 +15,7 @@ function NavbarBottom() {
    */
   const router = useRouter();
   const pageArray = router.asPath.split("/");
-  const page = pageArray[pageArray.length - 1];
+  const page = pageArray[1];
 
   const [isOpen, setIsOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState(`${page}`);

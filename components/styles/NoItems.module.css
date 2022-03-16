@@ -1,0 +1,11 @@
+.no_content {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  margin: -2.5rem 0;
+  height: calc(100vh - 6.5rem);
+  text-align: center;
+}
+.subtext{
+  color: var(--accent-dark);
+}

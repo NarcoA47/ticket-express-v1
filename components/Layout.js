@@ -19,7 +19,7 @@ function Layout({ children }) {
   // Absolute path logic
   const router = useRouter();
   const pageArray = router.asPath.split("/");
-  const page = pageArray[pageArray.length - 1]
+  const page = pageArray[pageArray.length - 1];
   const rawPage = page.split("-").join(" ");
   const pageName = rawPage.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
@@ -51,6 +51,9 @@ function Layout({ children }) {
               </div>
             </Link>
             <h1>{pageName}</h1>
+            <Link passHref href="/upload">
+              <p className={styles.upload_link}>Upload</p>
+            </Link>
           </div>
         </header>
       )}

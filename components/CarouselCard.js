@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./styles/CarouselCard.module.css";
 
 /* Capitalize every word: 
   str.replace(/(^\w|\s\w)/g, m => m.toUpperCase())
@@ -11,13 +12,11 @@ const CarouselCard = ({ field, path, title, image, rating, cinema }) => {
   const link = `/${field}/${path}`;
   return (
     <Link href={link} passHref>
-      <div>
-        <div className="carousel_container">
+      <div className={styles.master_container}>
+        <div className={styles.container}>
           {/* Image */}
           <motion.div
-            className={`image rounded-md cursor-pointer overflow-hidden ${
-              cinema && "cinema_image"
-            }`}
+            className={`image ${styles.card_face} ${cinema && "cinema_image"}`}
             whileHover={{ scale: 1.01, transition: { delay: 0.2 } }}
             whileTap={{ scale: 0.98 }}
           >
@@ -25,14 +24,13 @@ const CarouselCard = ({ field, path, title, image, rating, cinema }) => {
               src={image}
               alt={title}
               layout="fill"
-              className="rounded-md"
               priority
               // placeholder="blur"
             />
           </motion.div>
           {/* Rating */}
           {cinema && (
-            <p className="absolute top-0 flex items-center p-1.5 bg-purple-50 text-xs rounded-br-md">
+            <p className={styles.rating}>
               <Icon
                 icon="typcn:star"
                 inline={false}
@@ -42,7 +40,7 @@ const CarouselCard = ({ field, path, title, image, rating, cinema }) => {
             </p>
           )}
         </div>
-        <p className="text-lm text-center font-semibold px-2 mb-4">{title}</p>
+        <p className={styles.title}>{title}</p>
       </div>
     </Link>
   );

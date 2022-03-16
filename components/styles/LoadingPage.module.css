@@ -2,15 +2,16 @@
    display: flex;
    align-items: center;
    justify-content: center;
-   min-height: 100vh;
+   height: 100vh;
    background: var(--surface-1);
    font-family: 'Popins', sans-serif;
  }
  .loading_text{
    position: relative;
    font-size: 14vw;
+   font-weight: bold;
    color: var(--surface-1);
-   -webkit-text-stroke: 0.3vw var(--text-grey);
+   -webkit-text-stroke: 0.3vw var(--surface-2);
    text-transform: uppercase;
  }
  .loading_text::before{

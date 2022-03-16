@@ -13,6 +13,7 @@
   content: "";
   position: absolute;
   inset: 0 0;
+  -webkit-backdrop-filter:blur(8px);
   backdrop-filter: blur(8px);
   /* border: 1px solid slateblue; */
   background-color: var(--surface-light-transparent);
@@ -30,7 +31,13 @@
   width: 2.75rem !important;
   z-index: 100;
 }
-
+.upload_link{
+  z-index: 100;
+  background-color: var(--accent);
+  padding: 0 .5rem;
+  border-radius: .25rem;
+  font-weight: bolder;
+}
 /* @media (prefers-color-scheme: dark){
    .header{
       background: linear-gradient(var(--surface-dark-transparent) 80%, transparent);

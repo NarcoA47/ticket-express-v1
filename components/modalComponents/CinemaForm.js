@@ -1,14 +1,5 @@
 import styles from "./styles/CinemaForm.module.css";
-function CinemaForm({
-  title,
-  rating,
-  duration,
-  desc,
-  genre,
-  cast,
-  director,
-  airing,
-}) {
+function CinemaForm({ title, rating, duration, desc, genre, cast, director }) {
   return (
     <>
       <label htmlFor="title">Title:</label>
@@ -16,17 +7,15 @@ function CinemaForm({
         ref={title}
         type="text"
         placeholder="Spiderman: No Way Home"
-        className="w-full"
         required
       />
 
       <div className={styles.flexed_details}>
-        <input ref={rating} type="text" placeholder="Rating" className="" />
+        <input ref={rating} type="text" placeholder="Rating" />
         <input
           ref={duration}
           type="text"
           placeholder="Length (mins)"
-          className=""
           required
         />
       </div>
@@ -35,7 +24,6 @@ function CinemaForm({
         ref={genre}
         type="text"
         placeholder="Action / Adventure"
-        className="w-full"
         required
       />
 
@@ -45,7 +33,6 @@ function CinemaForm({
         type="text"
         name="description"
         placeholder="There once was a young lass..."
-        className="w-full h-28"
         required
       />
 
@@ -54,7 +41,6 @@ function CinemaForm({
         ref={director}
         type="text"
         placeholder="Robert Freeman"
-        className="border-none w-full"
       />
 
       <label htmlFor="cast">Cast:</label>
@@ -62,7 +48,6 @@ function CinemaForm({
         ref={cast}
         type="text"
         placeholder="Tom Holland, Zendaya, Nikita Harris"
-        className="border-none w-full"
         required
       />
     </>
