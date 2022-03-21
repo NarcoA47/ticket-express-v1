@@ -1,8 +1,10 @@
-.container {
-  margin-top: -2rem;
-}
 .more_events_image {
   border-radius: 0.4rem;
   overflow: hidden;
 }
-
+.preview_details {
+  padding: .5rem 0 0 1rem;
+}
+.preview_details h2{
+  padding-top: .75rem;
+}

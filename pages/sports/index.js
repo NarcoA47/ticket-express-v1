@@ -20,7 +20,7 @@ export default function WebEventsPage() {
   return (
     <AnimatePresence exitBeforeEnter>
       {!loading ? (
-        props.length === 0 ? (
+        props?.length === 0 ? (
           <motion.div
             key="noItems"
             initial={{ opacity: 0 }}

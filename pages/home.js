@@ -26,10 +26,10 @@ export default function Home() {
   return (
     <AnimatePresence exitBeforeEnter>
       {!loading ? (
-        webProps.length === 0 &&
-        sportsProps.length === 0 &&
-        cinemaProps.length === 0 &&
-        eventsProps.length === 0 ? (
+        webProps?.length === 0 &&
+        sportsProps?.length === 0 &&
+        cinemaProps?.length === 0 &&
+        eventsProps?.length === 0 ? (
           <NoItems />
         ) : (
           <motion.div

@@ -23,9 +23,9 @@ export default function WebEvent() {
   }, [path]);
 
   useEffect(() => {
-    if (props.image === undefined) return;
+    if (props?.image === undefined) return;
     setLoading(false);
-  }, [props.image]);
+  }, [props?.image]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -37,16 +37,16 @@ export default function WebEvent() {
           exit={{ opacity: 0 }}
         >
           <Layout>
-            <EventLayout price={props.price}>
+            <EventLayout price={props?.price}>
               <EventCard
-                desc={props.description}
-                image={props.image}
-                title={props.title}
-                date={props.date}
-                time={props.time}
-                price={props.price}
-                location={props.location}
-                duration={props.duration}
+                desc={props?.description}
+                image={props?.image}
+                title={props?.title}
+                date={props?.date}
+                time={props?.time}
+                price={props?.price}
+                location={props?.location}
+                duration={props?.duration}
               />
             </EventLayout>
           </Layout>

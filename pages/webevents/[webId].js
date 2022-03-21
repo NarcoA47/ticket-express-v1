@@ -16,6 +16,7 @@ export default function WebEvent() {
   const path = pathArray[pathArray.length - 1];
 
   useEffect(() => {
+    setLoading(true)
     getPropData("webevents", `${path}`).then((value) => {
       setProps(value[0]);
       setLoading(false);
@@ -23,9 +24,9 @@ export default function WebEvent() {
   }, [path]);
 
   useEffect(() => {
-    if (props.image === undefined) return;
+    if (props?.image === undefined) return;
     setLoading(false);
-  }, [props.image]);
+  }, [props?.image]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -37,14 +38,14 @@ export default function WebEvent() {
           exit={{ opacity: 0 }}
         >
           <Layout>
-            <EventLayout price={props.price}>
+            <EventLayout price={props?.price}>
               <WebCard
-                desc={props.description}
-                image={props.image}
-                title={props.title}
-                date={props.date}
-                time={props.time}
-                price={props.price}
+                desc={props?.description}
+                image={props?.image}
+                title={props?.title}
+                date={props?.date}
+                time={props?.time}
+                price={props?.price}
               />
             </EventLayout>
           </Layout>

@@ -10,8 +10,8 @@ function WebCard({ desc, image, date, time, price, title }) {
         <div className="details">
           <h1 className="title">{title}</h1>
           <div className="date_and_time">
-            <p>{date}</p>
-            <p>{time}</p>
+            <p>{new Date(date).toUTCString().slice(0, -13)}</p>
+            <p>{time} hrs</p>
           </div>
           <p className="description">{desc}</p>
           <p className="price">

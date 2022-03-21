@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useFlutterwave } from "flutterwave-react-v3";
-import { getFlutterwaveConfig, getProps } from "../utilities/functions";
+import { getDateString, getFlutterwaveConfig, getProps } from "../utilities/functions";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +54,7 @@ function EventLayout({ price, children, cinema }) {
           <Link key={doc?.id} passHref href={`/${field}/${doc.path}`}>
             <div className="card-preview">
               <div
-                className={`image ${cinema && styles.cinema_image} ${
+                className={`image ${cinema && 'cinema_image'} ${
                   styles.more_events_image
                 }`}
               >
@@ -64,9 +64,12 @@ function EventLayout({ price, children, cinema }) {
                   layout="fill"
                 />
               </div>
-              <div className="details preview-details">
+              <div className={styles.preview_details}>
                 <div className="date_and_time">
-                  <p className="date">{doc?.date}</p>
+                  <p className="date">
+                    {getDateString(doc.date)?.[0]}
+                    <span>{getDateString(doc.date)?.[1]}</span>
+                  </p>
                 </div>
                 <h2 className="title">{doc?.title}</h2>
               </div>

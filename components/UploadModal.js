@@ -10,68 +10,6 @@ import EventForm from "./modalComponents/EventForm";
 import SportForm from "./modalComponents/SportForm";
 import { AnimatePresence, motion } from "framer-motion";
 
-const DataModel = {
-  cinemaObject: {
-    title: "",
-    //Lowercase name of Movie. Used for indexing and checking for duplicate movies
-    path: "",
-    image: "",
-    desc: "",
-    duration: 1, //in minutes
-    rating: 1,
-    genre: "",
-    director: "",
-    cast: "",
-    airingAt: [], //Cinemas currently airing the movie
-    // Price of the movie depends on which cinema it is airing at
-    likes: 1,
-    purchases: 1,
-  },
-
-  webObject: {
-    title: "",
-    //Lowercase name of Movie. Used for indexing and checking for duplicate movies
-    path: "",
-    image: "",
-    desc: "",
-    date: "", // Date and Time
-    time: 1,
-    link: "",
-    price: 1,
-    likes: 1,
-    purchases: 1,
-  },
-
-  sportsObject: {
-    title: "",
-    //Lowercase name of Movie. Used for indexing and checking for duplicate movies
-    path: "",
-    image: "",
-    desc: "",
-    location: "",
-    date: "", // Date and Time
-    time: 1,
-    price: 1,
-    likes: 1,
-    purchases: 1,
-  },
-
-  eventsObject: {
-    type: "", //concert, house-party, event e.g color-fest etc
-    title: "",
-    //Lowercase name of Movie. Used for indexing and checking for duplicate movies
-    path: "",
-    image: "",
-    desc: "",
-    location: "",
-    date: "", // Date and Time
-    time: 1,
-    price: 1,
-    likes: 1,
-    purchases: 1,
-  },
-};
-
 export default function UploadModal() {
   //   Global Field Refs
   const filePickerRef = useRef(null);
@@ -142,6 +80,17 @@ export default function UploadModal() {
     const postedOn = serverTimestamp();
     const path = title?.split(" ").join("-").toLowerCase();
     setLoading(true);
+
+    // const date = dateRef.current.value;
+    // const time = timeRef.current.value;
+
+    // console.log(`Date: ${date} \nTime: ${time}`);
+    // let dateFormat = `${date}T${time}:00`;
+    // d = new Date(dateFormat).toUTCString();
+
+    // d = new Date("Wed, 09 Mar 2022 21:25:00 GMT").getUTCDate();
+    // // d = new Date('Wed, 09 Mar 2022 21:25:00 GMT').toLocaleDateString('en-au');
+    // console.log("string => ", d);
 
     // Depending on the value, set the Object
     // And Upload it

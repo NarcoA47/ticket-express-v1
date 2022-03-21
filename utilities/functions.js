@@ -50,8 +50,7 @@ const postTo = async (field, object, imageString) => {
   );
   if (matchingDoc.length > 0) {
     return alert(`Already an event with the title ${object.title}`);
-  }
-   else {
+  } else {
     const docRef = await addDoc(collection(db, `${field}`), object);
 
     console.log("====================================");
@@ -158,6 +157,35 @@ const getFlutterwaveConfig = (username, email, eventTitle, price) => ({
   },
 });
 
+const getDateString = (string) => {
+  const day = new Date(string).getDate().toString();
+
+  if (Number(day) === NaN) return;
+
+  const month = new Date(string).toDateString().split(" ")[1];
+  switch (day[day.length - 1]) {
+    case "1": {
+      const dateString = [`${day}st`, `${month}`];
+      return dateString;
+    }
+
+    case "2": {
+      const dateString = [`${day}nd`, `${month}`];
+      return dateString;
+    }
+
+    case "3": {
+      const dateString = [`${day}rd`, `${month}`];
+      return dateString;
+    }
+
+    default: {
+      const dateString = [`${day}th`, `${month}`];
+      return dateString;
+    }
+  }
+};
+
 export {
   getOrderedProps,
   getPropData,
@@ -165,4 +193,5 @@ export {
   getPaths,
   getProps,
   getFlutterwaveConfig,
+  getDateString,
 };
