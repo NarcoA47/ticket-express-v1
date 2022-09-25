@@ -54,6 +54,9 @@ function Layout({ children }) {
             <Link passHref href="/upload">
               <p className={styles.upload_link}>Upload</p>
             </Link>
+            <Link passHref href="/upload">
+              <p className={styles.upload_link}>Upload</p>
+            </Link>
           </div>
         </header>
       )}
