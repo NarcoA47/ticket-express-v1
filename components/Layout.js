@@ -51,12 +51,17 @@ function Layout({ children }) {
               </div>
             </Link>
             <h1 className={styles.pageName}>{pageName}</h1>
-            <Link passHref href="/upload">
-              <p className={styles.upload_link}>Upload</p>
-            </Link>
-            <Link passHref href="/upload">
-              <p className={styles.upload_link}>Upload</p>
-            </Link>
+
+            <div className={styles.headerLinks}>
+              
+              <Link passHref href="/upload">
+                <p className={styles.upload_link}>Upload</p>
+              </Link>
+              <Link passHref href="/signup">
+                <p className={styles.upload_link}>Signup</p>
+              </Link>
+            </div>
+
           </div>
         </header>
       )}

@@ -1,0 +1,79 @@
+.main{
+    display: block;
+}
+.main-content{
+    position: relative;
+    margin-left: 20px;
+    
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh
+}
+.mainContainer{
+    margin: 0px auto 24px;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+    flex: 1 0 auto;
+    max-width: 1296px;
+    height: 100%;
+}
+
+
+.title{
+    /* display: flex; */
+    flex: 0 1 auto;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+.title > h1{
+    margin-left: 10px;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.title > h2{
+    line-height: 1.2;
+    font-size: 21px;
+    font-weight: 300;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+
+.containers{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 3.75rem;
+    margin-bottom: 3.75rem;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.card{
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--accent);
+    width: 100%;
+}
+.card:hover{
+    cursor: pointer;
+    background-color: rgb(217, 217, 217);
+}
+.icon{
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 20px;
+}
+.cardTitle{
+    margin-bottom: 10px;
+}
+.cardTitle h2, .card-info p{
+    color: rgb(51, 51, 51);
+}
