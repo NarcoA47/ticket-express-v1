@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles/Layout.module.css";
 import { useEffect, useState } from "react";
+import { AuthProvider } from '../context/AuthContext'
 
 /* Capitalize every word: 
   str.replace(/(^\w|\s\w)/g, m => m.toUpperCase())

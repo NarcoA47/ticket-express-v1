@@ -48,12 +48,14 @@ const firebaseConfig = {
 // };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
+const fire = initializeApp(firebaseConfig);
 const db = getFirestore();
 const storage = getStorage();
+
 // const analytics = getAnalytics(app);
 
-export { app, db, storage };
+export default{ fire, db, storage };
 export {
   addDoc,
   collection,
