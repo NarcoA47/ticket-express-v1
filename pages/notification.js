@@ -1,10 +1,11 @@
 import React from 'react'
+import DashboardLayout from '../components/DashboardLayout'
 
 function Notification() {
   return (
-    <div>
+    <DashboardLayout>
       this is notification
-    </div>
+    </DashboardLayout>
   )
 }
 

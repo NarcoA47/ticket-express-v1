@@ -1,10 +1,11 @@
 import React from 'react'
+import DashboardLayout from '../components/DashboardLayout'
 
 function Mytickets() {
   return (
-    <div>
+    <DashboardLayout>
       this is tickets
-    </div>
+    </DashboardLayout>
   )
 }
 
